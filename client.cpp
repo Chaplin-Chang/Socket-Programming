@@ -11,27 +11,27 @@ void main()
     string confirm;
     char message[200];
 
-    //¶}©l Winsock-DLL
+    //é–‹å§‹ Winsock-DLL
     int r;
     WSAData wsaData;
     WORD DLLVersion;
     DLLVersion = MAKEWORD(2, 1);
     r = WSAStartup(DLLVersion, &wsaData);
 
-    //«Å§iµ¹ socket ¨Ï¥Îªº sockadder_in µ²ºc
+    //å®£å‘Šçµ¦ socket ä½¿ç”¨çš„ sockadder_in çµæ§‹
     SOCKADDR_IN addr;
 
     int addlen = sizeof(addr);
 
-    //³]©w socket
+    //è¨­å®š socket
     SOCKET sConnect;
 
     //AF_INET: internet-family
     //SOCKET_STREAM: connection-oriented socket
     sConnect = socket(AF_INET, SOCK_STREAM, NULL);
 
-    //³]©w addr ¸ê®Æ
-    addr.sin_addr.s_addr = inet_addr("127.0.0.1");
+    //è¨­å®š addr è³‡æ–™
+    addr.sin_addr.s_addr = inet_addr("XXX.X.X.X");
     addr.sin_family = AF_INET;
     addr.sin_port = htons(1234);
 
@@ -47,16 +47,16 @@ void main()
         {
             connect(sConnect, (SOCKADDR*)&addr, sizeof(addr));
 
-            //±µ¦¬ server ºİªº°T®§
+            //æ¥æ”¶ server ç«¯çš„è¨Šæ¯
             ZeroMemory(message, 200);
             r = recv(sConnect, message, sizeof(message), 0);
             cout << message << endl;
 
-            //³]©w closesocket ®É¡A¤£¸g¹L TIME-WAIT ¹Lµ{,ª½±µÃö³¬socket
+            //è¨­å®š closesocket æ™‚ï¼Œä¸ç¶“é TIME-WAIT éç¨‹,ç›´æ¥é—œé–‰socket
             //BOOL bDontLinger = FALSE;
             //setsockopt(sConnect,SOL_SOCKET,SO_DONTLINGER,(const char*)&bDontLinger,sizeof(BOOL));
 
-            //­Y¤§«á¤£¦A¨Ï¥Î¡A¥i¥Î closesocket Ãö³¬³s½u
+            //è‹¥ä¹‹å¾Œä¸å†ä½¿ç”¨ï¼Œå¯ç”¨ closesocket é—œé–‰é€£ç·š
             closesocket(sConnect);
 
             getchar();
