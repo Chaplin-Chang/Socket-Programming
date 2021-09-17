@@ -10,34 +10,34 @@ void main()
     int r;
     WSAData wsaData;
     WORD DLLVSERION;
-    DLLVSERION = MAKEWORD(2, 1);//Winsocket-DLL ª©¥»
+    DLLVSERION = MAKEWORD(2, 1);//Winsocket-DLL ç‰ˆæœ¬
 
-    //¥Î WSAStartup ¶}©l Winsocket-DLL
+    //ç”¨ WSAStartup é–‹å§‹ Winsocket-DLL
     r = WSAStartup(DLLVSERION, &wsaData);
 
-    //«Å§i socket ¦ì§}¸ê°T(¤£¦Pªº³q°T,¦³¤£¦Pªº¦ì§}¸ê°T,©Ò¥H·|¦³¤£¦Pªº¸ê®Æµ²ºc¦s©ñ³o¨Ç¦ì§}¸ê°T)
+    //å®£å‘Š socket ä½å€è³‡è¨Š(ä¸åŒçš„é€šè¨Š,æœ‰ä¸åŒçš„ä½å€è³‡è¨Š,æ‰€ä»¥æœƒæœ‰ä¸åŒçš„è³‡æ–™çµæ§‹å­˜æ”¾é€™äº›ä½å€è³‡è¨Š)
     SOCKADDR_IN addr;
     int addrlen = sizeof(addr);
 
-    //«Ø¥ß socket
+    //å»ºç«‹ socket
     SOCKET sListen; //listening for an incoming connection
     SOCKET sConnect; //operating if a connection was found
 
-    //AF_INET¡Gªí¥Ü«Ø¥ßªº socket Äİ©ó internet family
-    //SOCK_STREAM¡Gªí¥Ü«Ø¥ßªº socket ¬O connection-oriented socket 
+    //AF_INETï¼šè¡¨ç¤ºå»ºç«‹çš„ socket å±¬æ–¼ internet family
+    //SOCK_STREAMï¼šè¡¨ç¤ºå»ºç«‹çš„ socket æ˜¯ connection-oriented socket 
     sConnect = socket(AF_INET, SOCK_STREAM, NULL);
 
-    //³]©w¦ì§}¸ê°Tªº¸ê®Æ
-    addr.sin_addr.s_addr = inet_addr("127.0.0.1");
+    //è¨­å®šä½å€è³‡è¨Šçš„è³‡æ–™
+    addr.sin_addr.s_addr = inet_addr("XXX.X.X.X");
     addr.sin_family = AF_INET;
     addr.sin_port = htons(1234);
 
-    //³]©w Listen
+    //è¨­å®š Listen
     sListen = socket(AF_INET, SOCK_STREAM, NULL);
     bind(sListen, (SOCKADDR*)&addr, sizeof(addr));
     listen(sListen, SOMAXCONN);//SOMAXCONN: listening without any limit
 
-    //µ¥«İ³s½u
+    //ç­‰å¾…é€£ç·š
     SOCKADDR_IN clinetAddr;
     while (true)
     {
@@ -48,7 +48,7 @@ void main()
             cout << "a connection was found" << endl;
             printf("server: got connection from %s\n", inet_ntoa(addr.sin_addr));
 
-            //¶Ç°e°T®§µ¹ client ºİ
+            //å‚³é€è¨Šæ¯çµ¦ client ç«¯
             const char* sendbuf = "sending data test";
             send(sConnect, sendbuf, (int)strlen(sendbuf), 0);
 
